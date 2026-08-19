@@ -1,0 +1,7 @@
+perfumeria_web/
+│── app.py
+├── static/
+│   └── uploads/     (¡Importante! Crea esta carpeta vacía, aquí se guardarán las fotos)
+└── templates/
+    ├── index.html
+    └── admin.html

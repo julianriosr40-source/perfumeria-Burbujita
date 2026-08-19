@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#073b4c">
+  <title>Perfumería Burbujita | Cuidado que inspira</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { ink: '#241b14', sea: '#a46b2e', sand: '#f4e8d5', gold: '#c8a878', mist: '#d8b888' },
+      fontFamily: { sans: ['DM Sans', 'sans-serif'], display: ['Playfair Display', 'serif'] }
+    } } };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #f4e8d5; }
+    .btn-main { background:#a46b2e; color:#fff; font-weight:700; transition:transform .2s,background .2s,box-shadow .2s; }
+    .btn-main:hover { background:#8a5725; box-shadow:0 12px 25px rgba(36,27,20,.24); transform:translateY(-1px); }
+    .hero-video { mix-blend-mode:multiply; filter:saturate(.85) contrast(.94) brightness(1.06); -webkit-mask-image:radial-gradient(ellipse 95% 92% at 58% 55%,#000 45%,transparent 100%); mask-image:radial-gradient(ellipse 95% 92% at 58% 55%,#000 45%,transparent 100%); }
+    .mega-menu { transition:opacity .18s ease, transform .18s ease, visibility .18s ease; }
+    .mega-menu.is-open { visibility:visible; opacity:1; transform:translateY(0); }
+    .flash-badge { animation:flash 1.5s ease-in-out infinite; }
+    @keyframes flash { 0%,100% { transform:scale(1); box-shadow:0 0 0 0 rgba(217,164,65,.5); } 50% { transform:scale(1.06); box-shadow:0 0 0 8px rgba(217,164,65,0); } }
+    .whatsapp-float { animation:whatsapp-pulse 1.6s ease-in-out infinite, wobble 3s ease-in-out infinite; }
+    .whatsapp-card { animation:whatsapp-neon 2s ease-in-out infinite; }
+    .whatsapp-card:hover { animation-play-state:paused; transform:scale(1.08); }
+    @keyframes whatsapp-pulse { 50% { box-shadow:0 0 0 15px rgba(37,211,102,0); } }
+    @keyframes wobble { 0%,70%,100%{transform:rotate(0)}75%{transform:rotate(-9deg)}80%{transform:rotate(8deg)}85%{transform:rotate(-4deg)} }
+    @keyframes whatsapp-neon { 0%,100% { box-shadow:0 0 6px rgba(37,211,102,.55),0 0 15px rgba(37,211,102,.32); } 50% { box-shadow:0 0 10px rgba(37,211,102,.9),0 0 25px rgba(37,211,102,.58); } }
+    dialog::backdrop { background:rgba(7,59,76,.66); backdrop-filter:blur(7px); }
+    .zoom-panel { overflow:hidden; cursor:zoom-in; background:#d8b888; }
+    .zoom-panel img { transition:transform .35s ease; transform-origin:var(--zoom-x, 50%) var(--zoom-y, 50%); }
+    .zoom-panel:hover img { transform:scale(1.65); }
+    .thumb-activa { outline:3px solid #a46b2e; outline-offset:2px; }
+    .promo-popup { animation:popup-in .45s cubic-bezier(.2,.8,.2,1) both; overflow:hidden; }
+    .promo-popup::before,.promo-popup::after { content:''; position:absolute; width:14rem; height:3rem; background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent); animation:shine 3s linear infinite; }
+    .promo-popup::before { left:-8rem; top:1rem; transform:rotate(-28deg); }
+    .promo-popup::after { right:-8rem; bottom:1rem; transform:rotate(152deg); animation-delay:1.4s; }
+    @keyframes popup-in { from { opacity:0; transform:scale(.82) translateY(20px); } to { opacity:1; transform:scale(1) translateY(0); } }
+    @keyframes shine { to { translate:26rem 0; opacity:.15; } }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+  </style>
+</head>
+<body class="font-sans text-ink antialiased">
+  <header class="relative isolate min-h-[620px] overflow-visible bg-ink text-white">
+    <video class="hero-video absolute inset-0 h-full w-full object-cover opacity-65" autoplay loop muted playsinline aria-hidden="true">
+      <source src="{{ url_for('static', filename='fondo.mp4') }}" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 bg-ink/65"></div>
+    <nav class="relative z-[80] mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
+      <a href="#inicio" class="flex items-center gap-3" aria-label="Burbujita, inicio">
+        <svg class="h-11 w-11" viewBox="0 0 64 64" aria-hidden="true"><path fill="#c8a878" d="M21 19h22v8H21z"/><path fill="#f4e8d5" d="M18 27h28a5 5 0 0 1 5 5v22a7 7 0 0 1-7 7H20a7 7 0 0 1-7-7V32a5 5 0 0 1 5-5Z"/><path fill="#99642c" d="M25 37h14v15H25z"/><circle fill="#c8a878" cx="51" cy="16" r="5"/></svg>
+        <span><b class="block font-display text-xl leading-none">Burbujita</b><small class="text-[10px] font-bold uppercase tracking-[.2em] text-gold">Perfumería</small></span>
+      </a>
+      <div class="flex items-center gap-2">
+        <button id="menu-trigger" class="rounded-full border border-white/30 px-4 py-2 text-sm font-bold transition hover:bg-white/15" aria-expanded="false" aria-controls="mega-menu">Categorías <span aria-hidden="true">⌄</span></button>
+        <button id="abrir-carrito" class="relative grid h-11 w-11 place-items-center rounded-full bg-sand text-ink shadow-lg" aria-label="Abrir carrito"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L20 7H6"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg><span id="cantidad-carrito" class="absolute -right-1 -top-1 hidden min-w-5 rounded-full bg-gold px-1 text-xs font-bold text-ink">0</span></button>
+      </div>
+    </nav>
+    <div id="mega-menu" class="mega-menu invisible absolute left-0 top-[76px] z-[70] w-full -translate-y-2 border-y border-[#d9a441]/30 bg-sand px-5 py-8 opacity-0 shadow-2xl" aria-label="Categorías"><div id="mega-contenido" class="mx-auto grid max-w-7xl grid-cols-2 gap-x-8 gap-y-7 md:grid-cols-4"><p class="text-sm text-slate-500">Cargando categorías…</p></div></div>
+    <section id="inicio" class="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-5 pb-24 pt-16 sm:px-8 md:grid-cols-2 md:py-28">
+      <div><p class="text-sm font-bold uppercase tracking-[.22em] text-gold">Cuidado que inspira</p><h1 class="mt-4 max-w-xl font-display text-5xl leading-[1.02] sm:text-6xl">Tu momento de bienestar, <i class="font-normal text-gold">todos los días.</i></h1><p class="mt-6 max-w-lg text-lg leading-relaxed text-white/85">Perfumes, cuidado personal y limpieza elegidos para acompañar tu rutina.</p><a href="#catalogo" class="btn-main mt-8 inline-block rounded-full px-7 py-3.5">Explorar catálogo</a></div>
+      <div class="hidden justify-self-end md:block"><div class="rounded-[3rem] border border-white/25 bg-sand/15 p-8 backdrop-blur-sm"><svg viewBox="0 0 180 220" class="h-64 drop-shadow-2xl" aria-label="Frasco de perfume" role="img"><rect x="66" y="26" width="48" height="23" rx="4" fill="#c8a878"/><rect x="53" y="48" width="74" height="126" rx="18" fill="#f4e8d5"/><rect x="60" y="57" width="60" height="107" rx="12" fill="#99642c"/><path d="M72 105h36" stroke="white" stroke-width="5" stroke-linecap="round"/><circle cx="134" cy="59" r="10" fill="#c8a878"/></svg></div></div>
+    </section>
+  </header>
+  <main class="mx-auto max-w-7xl px-5 py-20 sm:px-8"><section id="banner-descuento-global" class="mb-10 hidden rounded-2xl border border-gold/60 bg-gold/20 px-5 py-4 text-center text-sm font-bold text-ink"><span id="texto-descuento-global"></span></section>
+    <section id="destacados" class="mb-20"><div class="mb-8 flex items-end justify-between gap-4"><div><p class="text-sm font-bold uppercase tracking-[.2em] text-sea">Oportunidades</p><h2 class="mt-2 font-display text-4xl">Destacados</h2></div><div class="flex gap-2"><button id="carrusel-prev" class="grid h-10 w-10 place-items-center rounded-full border border-sea text-sea" aria-label="Anterior">←</button><button id="carrusel-next" class="grid h-10 w-10 place-items-center rounded-full bg-sea text-white" aria-label="Siguiente">→</button></div></div><div id="carrusel" class="flex snap-x gap-5 overflow-x-auto pb-5" aria-live="polite"></div></section>
+    <section id="catalogo"><div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p class="text-sm font-bold uppercase tracking-[.2em] text-sea">Elegí tu favorito</p><h2 class="mt-2 font-display text-4xl">Nuestro catálogo</h2></div><p id="filtro-activo" class="text-sm text-slate-500"></p></div><div id="productos" class="mt-9 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4" aria-live="polite"><p class="col-span-full text-center text-slate-500">Cargando productos…</p></div></section>
+  </main>
+  <footer class="bg-ink px-5 py-12 text-sand"><div class="mx-auto flex max-w-7xl flex-col justify-between gap-5 sm:flex-row"><div><p class="font-display text-2xl">Perfumería Burbujita</p><p class="mt-1 text-sm text-white/65">Un toque de bienestar en cada elección.</p></div><button id="abrir-terminos" class="text-left text-sm font-bold underline decoration-gold underline-offset-4">Términos y condiciones</button></div></footer>
+  <a id="whatsapp" href="#" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp" class="whatsapp-float fixed bottom-5 right-5 z-50 grid h-16 w-16 place-items-center rounded-full bg-[#25d366] text-2xl text-white shadow-xl">☏</a>
+  <aside id="sidebar-carrito" class="fixed inset-y-0 right-0 z-[100] flex w-full max-w-md translate-x-full flex-col bg-sand shadow-2xl transition-transform duration-300" aria-label="Carrito"><div class="flex items-center justify-between border-b border-ink/10 p-6"><h2 class="font-display text-3xl">Tu carrito</h2><button id="cerrar-carrito" class="grid h-10 w-10 place-items-center rounded-full bg-mist text-ink" aria-label="Cerrar carrito">×</button></div><div id="items-carrito" class="flex-1 overflow-y-auto p-6"></div><div class="border-t border-ink/10 p-6"><div class="mb-4 flex justify-between text-lg font-bold"><span>Total</span><span id="total-carrito"></span></div><p class="mb-4 rounded-xl bg-gold/20 p-3 text-xs font-semibold text-ink">No realizamos envíos. Única compra y retiro en el local.</p><button id="comprar-wpp" class="btn-main w-full rounded-full px-4 py-3">Comprar por WhatsApp</button></div></aside>
+  <dialog id="modal-detalle" class="m-auto w-[calc(100%-2rem)] max-w-3xl rounded-3xl border-0 bg-sand p-0 shadow-2xl"><div id="detalle-contenido"></div></dialog>
+  <dialog id="modal-terminos" class="m-auto w-[calc(100%-2rem)] max-w-xl rounded-3xl border-0 bg-sand p-0 shadow-2xl"><div class="p-8"><button id="cerrar-terminos" class="float-right text-2xl text-sea" aria-label="Cerrar">×</button><h2 class="font-display text-3xl">Términos y condiciones</h2><div class="mt-6 space-y-4 text-sm leading-relaxed text-slate-600"><p>Los productos están sujetos a disponibilidad y los precios o descuentos pueden actualizarse sin aviso previo.</p><p>Antes de confirmar un pedido se informarán stock y medios de pago. No realizamos envíos: las compras se retiran únicamente en el local.</p><p>Los cambios y devoluciones se gestionan de acuerdo con la normativa de defensa del consumidor vigente en Argentina.</p></div></div></dialog>
+  <dialog id="modal-promocion" class="m-auto w-[calc(100%-2rem)] max-w-md rounded-3xl border-0 bg-transparent p-0 shadow-2xl"><div class="promo-popup relative bg-ink p-8 text-center text-white"><button id="cerrar-promocion" class="absolute right-4 top-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/15 text-xl" aria-label="Cerrar promoción">×</button><p class="relative z-10 text-sm font-bold uppercase tracking-[.23em] text-gold">Oferta especial</p><h2 id="texto-promocion" class="relative z-10 mt-4 font-display text-4xl leading-tight"></h2><p class="relative z-10 mt-5 text-sm text-white/75">Válida por tiempo limitado. Aprovechala en nuestro local.</p><button id="ver-campania" class="btn-main relative z-10 mt-7 rounded-full px-6 py-3">Ver productos</button></div></dialog>
+  <script>
+    const NUMERO_WHATSAPP = '5491162506769'; // Reemplazar por el número comercial.
+    const money = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 2 });
+    const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' })[char]);
+    const precioFinal = producto => producto.precio * (1 - (producto.descuento_porcentaje || 0) / 100) * (1 - (producto.descuento_global_porcentaje || 0) / 100);
+    const descuentoEfectivo = producto => producto.precio ? Math.round((1 - precioFinal(producto) / producto.precio) * 100) : 0;
+    let productos = [], categorias = [], categoriaActiva = null;
+    let carrito = JSON.parse(localStorage.getItem('burbujita-carrito') || '[]');
+    const $ = selector => document.querySelector(selector);
+    $('#whatsapp').href = `https://wa.me/${NUMERO_WHATSAPP}`;
+
+    function abrirMenu() { $('#mega-menu').classList.add('is-open'); $('#menu-trigger').setAttribute('aria-expanded', 'true'); }
+    function cerrarMenu() { $('#mega-menu').classList.remove('is-open'); $('#menu-trigger').setAttribute('aria-expanded', 'false'); }
+    $('#menu-trigger').addEventListener('click', event => { event.stopPropagation(); $('#mega-menu').classList.contains('is-open') ? cerrarMenu() : abrirMenu(); });
+    $('#mega-menu').addEventListener('mouseenter', abrirMenu); $('#mega-menu').addEventListener('mouseleave', cerrarMenu);
+    document.addEventListener('click', event => { if (!$('#mega-menu').contains(event.target) && !$('#menu-trigger').contains(event.target)) cerrarMenu(); });
+
+    async function cargarDatos() {
+      try {
+        const [respuestaProductos, respuestaCategorias] = await Promise.all([fetch('/api/productos'), fetch('/api/categorias')]);
+        if (!respuestaProductos.ok || !respuestaCategorias.ok) throw new Error();
+        productos = await respuestaProductos.json(); categorias = await respuestaCategorias.json();
+        renderMegaMenu(); renderCatalogo(); renderDestacados(); renderBannerDescuentoGlobal();
+      } catch {
+        $('#productos').innerHTML = '<p class="col-span-full rounded-2xl bg-red-50 p-8 text-center text-red-700">No pudimos cargar el catálogo.</p>';
+        $('#mega-contenido').innerHTML = '<p class="text-sm text-slate-500">No se pudieron cargar las categorías.</p>';
+      }
+    }
+
+    function renderMegaMenu() {
+      const padres = categorias.filter(categoria => !categoria.parent_id);
+      $('#mega-contenido').innerHTML = padres.length ? padres.map(padre => {
+        const hijas = categorias.filter(categoria => categoria.parent_id === padre.id);
+        return `<section><button data-categoria="${padre.id}" class="categoria-link text-left font-bold text-sea hover:text-ink">${escapeHtml(padre.nombre)}</button>${hijas.length ? `<div class="mt-3 space-y-2">${hijas.map(hija => `<button data-categoria="${hija.id}" class="categoria-link block text-left text-sm text-slate-600 hover:text-sea">${escapeHtml(hija.nombre)}</button>`).join('')}</div>` : '<p class="mt-3 text-sm text-slate-400">Ver productos</p>'}</section>`;
+      }).join('') : '<p class="text-sm text-slate-500">Todavía no hay categorías creadas.</p>';
+      document.querySelectorAll('.categoria-link').forEach(boton => boton.addEventListener('click', () => filtrarCategoria(Number(boton.dataset.categoria))));
+    }
+
+    function filtrarCategoria(categoriaId) { categoriaActiva = categoriaId; cerrarMenu(); document.querySelector('#catalogo').scrollIntoView({ behavior: 'smooth' }); renderCatalogo(); }
+    function productosVisibles() { return categoriaActiva ? productos.filter(producto => producto.categoria_id === categoriaActiva) : productos; }
+    function renderBannerDescuentoGlobal() { const porcentaje = productos[0]?.descuento_global_porcentaje || 0; const banner = $('#banner-descuento-global'); banner.classList.toggle('hidden', !porcentaje); if (porcentaje) $('#texto-descuento-global').textContent = `¡${porcentaje}% OFF en toda la tienda por tiempo limitado!`; }
+    function tarjetaProducto(producto, carrusel = false) {
+      const descuento = descuentoEfectivo(producto), final = precioFinal(producto);
+      const mensaje = encodeURIComponent(`¡Hola! Me interesa ${producto.nombre} por ${money.format(final)}. ¿Tienen disponibilidad?`);
+      return `<article class="${carrusel ? 'min-w-[260px] max-w-[260px] snap-start' : ''} group overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-ink/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl"><button data-detalle="${producto.id}" class="relative block h-64 w-full overflow-hidden bg-mist text-left" aria-label="Ver detalle de ${escapeHtml(producto.nombre)}">${descuento > 0 ? `<span class="flash-badge absolute left-3 top-3 z-10 rounded-full bg-gold px-3 py-1 text-xs font-extrabold text-ink">¡${descuento}% OFF!</span>` : ''}<img src="/${encodeURI(producto.imagen)}" alt="${escapeHtml(producto.nombre)}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy"></button><div class="p-5"><p class="truncate text-xs font-bold uppercase tracking-wider text-sea">${escapeHtml(producto.categoria || 'Sin categoría')}</p><button data-detalle="${producto.id}" class="mt-1 block max-w-full truncate text-left text-lg font-bold hover:text-sea hover:underline">${escapeHtml(producto.nombre)}</button><div class="mt-2 flex items-end justify-between gap-3"><div>${descuento > 0 ? `<p class="text-sm text-slate-400 line-through">${money.format(producto.precio)}</p><p class="text-xl font-bold text-sea">${money.format(final)}</p>` : `<p class="text-xl font-bold text-sea">${money.format(producto.precio)}</p>`}</div><a href="https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}" target="_blank" rel="noopener" class="whatsapp-card grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#25D366] text-white drop-shadow-[0_0_12px_rgba(37,211,102,0.8)]" aria-label="Consultar ${escapeHtml(producto.nombre)} por WhatsApp"><svg viewBox="0 0 32 32" class="h-6 w-6" fill="currentColor" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3Zm0 23.7c-2 0-3.8-.5-5.4-1.5l-.4-.2-3.9 1 1-3.8-.3-.4a10.7 10.7 0 1 1 9 4.9Zm5.9-8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-.9 1.2-.3.3-.6.1a8.7 8.7 0 0 1-2.6-1.6 9.5 9.5 0 0 1-1.8-2.3c-.2-.3 0-.4.1-.6l.5-.6.2-.5c0-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.4 1 2.8 1.2 3 2.1 3.3 5 4.6c.7.3 1.3.5 1.8.7.8.2 1.5.2 2 .1.6-.1 1.9-.8 2.2-1.5s.3-1.4.2-1.5-.3-.2-.6-.3Z"/></svg></a></div></div></article>`;
+    }
+    function enlazarDetalles() { document.querySelectorAll('[data-detalle]').forEach(boton => boton.addEventListener('click', () => abrirDetalle(Number(boton.dataset.detalle)))); }
+    function renderCatalogo() { const visibles = productosVisibles(), categoria = categorias.find(c => c.id === categoriaActiva); $('#filtro-activo').textContent = categoria ? `Mostrando: ${categoria.nombre}` : 'Todos los productos'; $('#productos').innerHTML = visibles.length ? visibles.map(producto => tarjetaProducto(producto)).join('') : '<p class="col-span-full rounded-2xl bg-mist p-10 text-center text-slate-600">No hay productos en esta categoría.</p>'; enlazarDetalles(); }
+    function renderDestacados() { const destacados = productos.filter(producto => producto.descuento_porcentaje > 0 || producto.descuento_global_porcentaje > 0); $('#carrusel').innerHTML = destacados.length ? destacados.map(producto => tarjetaProducto(producto, true)).join('') : '<p class="py-5 text-slate-500">Pronto vas a encontrar oportunidades por acá.</p>'; enlazarDetalles(); }
+    $('#carrusel-prev').onclick = () => $('#carrusel').scrollBy({ left: -280, behavior: 'smooth' }); $('#carrusel-next').onclick = () => $('#carrusel').scrollBy({ left: 280, behavior: 'smooth' });
+
+    function abrirDetalle(id) {
+      const producto = productos.find(item => item.id === id), descuento = descuentoEfectivo(producto), final = precioFinal(producto);
+      const imagenes = [...new Set([producto.imagen, ...(producto.imagenes || [])].filter(Boolean))];
+      $('#detalle-contenido').innerHTML = `<div class="grid md:grid-cols-2"><div class="p-5 md:p-7"><div id="zoom-producto" class="zoom-panel h-72 rounded-2xl md:h-[420px]"><img id="imagen-principal" src="/${encodeURI(imagenes[0])}" alt="${escapeHtml(producto.nombre)}" class="h-full w-full object-cover"></div><div id="miniaturas-producto" class="mt-4 flex gap-3 overflow-x-auto pb-1">${imagenes.map((ruta, indice) => `<button data-miniatura="${indice}" class="h-16 w-16 shrink-0 overflow-hidden rounded-xl ${indice === 0 ? 'thumb-activa' : ''}" aria-label="Ver imagen ${indice + 1}"><img src="/${encodeURI(ruta)}" alt="" class="h-full w-full object-cover"></button>`).join('')}</div><p class="mt-3 text-xs text-slate-500">Pasá el cursor sobre la imagen para ampliarla.</p></div><div class="p-7 pt-0 md:pt-7"><button id="cerrar-detalle" class="float-right text-2xl text-sea" aria-label="Cerrar">×</button><p class="text-sm font-bold uppercase tracking-wider text-sea">${escapeHtml(producto.categoria || 'Producto')}</p><h2 class="mt-2 font-display text-3xl">${escapeHtml(producto.nombre)}</h2>${descuento > 0 ? `<p class="mt-4 text-slate-400 line-through">${money.format(producto.precio)}</p><p class="text-2xl font-bold text-sea">${money.format(final)} <span class="text-sm text-gold">${descuento}% OFF</span></p>` : `<p class="mt-4 text-2xl font-bold text-sea">${money.format(producto.precio)}</p>`}<p class="mt-5 whitespace-pre-line leading-relaxed text-slate-600">${escapeHtml(producto.especificacion || 'Sin descripción adicional.')}</p><div class="mt-6 rounded-2xl border border-gold/60 bg-gold/15 p-4 text-sm font-bold text-ink">⚠ No realizamos envíos. Única compra y retiro en el local.</div><button id="agregar-detalle" class="btn-main mt-6 w-full rounded-full px-4 py-3">Agregar al carrito</button></div></div>`;
+      $('#modal-detalle').showModal();
+      const panel = $('#zoom-producto'), principal = $('#imagen-principal');
+      panel.addEventListener('mousemove', event => { const rect = panel.getBoundingClientRect(); panel.style.setProperty('--zoom-x', `${(event.clientX - rect.left) / rect.width * 100}%`); panel.style.setProperty('--zoom-y', `${(event.clientY - rect.top) / rect.height * 100}%`); });
+      panel.addEventListener('mouseleave', () => { panel.style.setProperty('--zoom-x', '50%'); panel.style.setProperty('--zoom-y', '50%'); });
+      document.querySelectorAll('[data-miniatura]').forEach(boton => boton.onclick = () => { const indice = Number(boton.dataset.miniatura); principal.src = `/${encodeURI(imagenes[indice])}`; document.querySelectorAll('[data-miniatura]').forEach(item => item.classList.toggle('thumb-activa', item === boton)); });
+      $('#cerrar-detalle').onclick = () => $('#modal-detalle').close();
+      $('#agregar-detalle').onclick = () => agregarAlCarrito(producto);
+    }
+
+    function agregarAlCarrito(producto) { const precio = precioFinal(producto), item = carrito.find(item => item.id === producto.id); if (item) item.cantidad += 1; else carrito.push({ id: producto.id, nombre: producto.nombre, precio, cantidad: 1 }); guardarCarrito(); $('#modal-detalle').close(); abrirCarrito(); }
+    function guardarCarrito() { localStorage.setItem('burbujita-carrito', JSON.stringify(carrito)); renderCarrito(); }
+    function renderCarrito() { const cantidad = carrito.reduce((total, item) => total + item.cantidad, 0), total = carrito.reduce((suma, item) => suma + item.precio * item.cantidad, 0), badge = $('#cantidad-carrito'); badge.textContent = cantidad; badge.classList.toggle('hidden', !cantidad); $('#total-carrito').textContent = money.format(total); $('#items-carrito').innerHTML = cantidad ? carrito.map(item => `<div class="mb-4 flex items-start justify-between gap-3 border-b border-ink/10 pb-4"><div><b>${escapeHtml(item.nombre)}</b><p class="mt-1 text-sm text-slate-500">${item.cantidad} × ${money.format(item.precio)}</p></div><button data-quitar="${item.id}" class="text-sm font-bold text-sea">Eliminar</button></div>`).join('') : '<p class="py-8 text-center text-slate-500">Tu carrito está vacío.</p>'; document.querySelectorAll('[data-quitar]').forEach(boton => boton.onclick = () => { carrito = carrito.filter(item => item.id !== Number(boton.dataset.quitar)); guardarCarrito(); }); }
+    function abrirCarrito() { $('#sidebar-carrito').classList.remove('translate-x-full'); } $('#abrir-carrito').onclick = abrirCarrito; $('#cerrar-carrito').onclick = () => $('#sidebar-carrito').classList.add('translate-x-full');
+    $('#comprar-wpp').onclick = () => { if (!carrito.length) return; const total = carrito.reduce((suma, item) => suma + item.precio * item.cantidad, 0), lineas = carrito.map(item => `• ${item.nombre} — ${item.cantidad} × ${money.format(item.precio)}`).join('\n'), texto = `Hola, quiero realizar este pedido:\n${lineas}\n\nTotal: ${money.format(total)}\n\nRetiro en el local.`; window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener'); };
+    const terminos = $('#modal-terminos'); $('#abrir-terminos').onclick = () => terminos.showModal(); $('#cerrar-terminos').onclick = () => terminos.close();
+    async function cargarPopupPromocional() { try { const promocion = await (await fetch('/api/promocion-activa')).json(); const clave = `burbujita-popup-cerrado:${promocion.fecha_expiracion || ''}`; if (!promocion.activa || sessionStorage.getItem(clave)) return; $('#texto-promocion').textContent = promocion.texto_promocion; const modal = $('#modal-promocion'); const cerrar = () => { sessionStorage.setItem(clave, '1'); modal.close(); }; $('#cerrar-promocion').onclick = cerrar; $('#ver-campania').onclick = () => { cerrar(); $('#catalogo').scrollIntoView({ behavior: 'smooth' }); }; modal.showModal(); } catch { /* La tienda sigue disponible aunque la campaña no pueda cargarse. */ } }
+    renderCarrito(); cargarDatos(); cargarPopupPromocional();
+  </script>
+</body>
+</html>

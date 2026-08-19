@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#241b14"><title>Ingresar | Burbujita</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <script>tailwind.config={theme:{extend:{colors:{ink:'#241b14',sea:'#a46b2e',sand:'#f4e8d5',gold:'#c8a878'},fontFamily:{sans:['DM Sans','sans-serif'],display:['Playfair Display','serif']}}}}</script>
+</head>
+<body class="grid min-h-screen place-items-center bg-sand px-5 font-sans text-ink">
+  <main class="w-full max-w-md rounded-3xl bg-white p-8 shadow-2xl shadow-ink/15 sm:p-10">
+    <div class="flex items-center gap-3"><svg class="h-11 w-11" viewBox="0 0 64 64" aria-hidden="true"><path fill="#c8a878" d="M21 19h22v8H21z"/><path fill="#f4e8d5" d="M18 27h28a5 5 0 0 1 5 5v22a7 7 0 0 1-7 7H20a7 7 0 0 1-7-7V32a5 5 0 0 1 5-5Z"/><path fill="#99642c" d="M25 37h14v15H25z"/></svg><span><b class="block font-display text-2xl leading-none">Burbujita</b><small class="font-bold uppercase tracking-[.18em] text-sea">Administración</small></span></div>
+    <h1 class="mt-8 font-display text-4xl">Bienvenido</h1><p class="mt-2 text-sm text-slate-600">Ingresá para administrar el catálogo y las campañas.</p>
+    {% if error %}<p class="mt-5 rounded-xl bg-red-50 p-3 text-sm text-red-700">{{ error }}</p>{% endif %}
+    <form method="post" class="mt-6 space-y-5">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="siguiente" value="{{ siguiente }}">
+      <label class="block text-sm font-bold">Usuario<input name="usuario" required autocomplete="username" class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-sea focus:ring-4 focus:ring-gold/25"></label>
+      <label class="block text-sm font-bold">Contraseña<input name="contrasena" type="password" required autocomplete="current-password" class="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-sea focus:ring-4 focus:ring-gold/25"></label>
+      <button class="w-full rounded-full bg-sea px-5 py-3.5 font-bold text-white transition hover:bg-[#8a5725]">Ingresar al panel</button>
+    </form>
+    <a href="/" class="mt-6 block text-center text-sm font-bold text-sea">← Volver a la tienda</a>
+  </main>
+</body>
+</html>

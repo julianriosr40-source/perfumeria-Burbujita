@@ -77,7 +77,7 @@ Por defecto, las credenciales iniciales son:
 
 ```text
 Usuario: admin
-Contraseña: Burbujita2026!
+Contraseña: Burbujita3026!
 ```
 
 Cambialas antes de publicar la aplicación. Podés definir otras credenciales mediante variables de entorno:
